@@ -1,0 +1,45 @@
+
+/*
+    Tienes entradas:
+        R - S 
+    Salidas 
+        Q - Q'
+        
+     Tabla:
+     RS | Q
+     00 | 
+     01 |
+     10 |
+     11 |
+*/
+
+
+
+
+// CIRCUITO SECUENCIAL
+module rs_latch_behavioral(R , S, Q1, Q0 , CLK );// Agregaremos el clock 
+    input R , S, CLK;
+    output Q1 , Q0;
+    
+    always @(posedge CLK) begin 
+      if (R==0 & S==0)
+        Q1 <= Q1;
+      else if (R==0 & S==1)
+        Q1 <= 1;
+      else if (R==1 & S==0)
+        Q1 <= 0;
+     /* else if (R==1 & S==1)
+        Q1 <= ; // NO SE ASIGNA YA QUE DA UN FORBIDDEN
+       */
+    end
+    
+    
+endmodule
+
+// Para crear el test_becnh
+/*  1) Vamos a Simulation sources
+    2) * Add or create simulation sources
+    3) Nombre igual al modulo
+*/
+// Para saber donde esta el error de sintaxis
+/*Vamos a run syntesis*/
