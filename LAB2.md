@@ -23,6 +23,6 @@ Comprobamos que funciona!
 ## Simulación y Sintesis  
 
 
-## Esquematicp FSM
+## Esquemático FSM
 ![IMG_20230428_101730_edit_47008701345430](https://user-images.githubusercontent.com/73077727/235195063-952136d3-b128-489d-935b-d9688be2661a.jpg)
 ![IMG_20230428_101720_edit_46989536504808](https://user-images.githubusercontent.com/73077727/235195067-1447aa46-17ce-40d7-8f0d-37ac4e04d18f.jpg)
