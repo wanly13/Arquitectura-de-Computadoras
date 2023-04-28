@@ -1,0 +1,26 @@
+`timescale 1ns / 1ps
+
+
+module Thunderbird_tb;
+    reg clk, reset;
+    reg left;
+    reg rigth;
+    wire Ra,Rb,Rc,La,Lb,Lc;
+   
+Thunderbird Thunderbird_tb(clk,reset,left,rigth,Ra,Rb,Rc,La,Lb,Lc);
+initial begin
+clk = 0;
+forever #10 clk =-clk;
+end
+initial begin
+    left = "0"; rigth = "0";reset = "1";
+    #30; reset = "0";
+    #40; left = "1"; rigth = "0";
+    #40; left = "0"; rigth = "1";
+    #40; left = "1"; rigth = "1";
+   
+    #40; left = "0"; rigth = "1";
+    #40; left = "1"; rigth = "0";
+    #40; left = "1"; rigth = "1";
+    end
+endmodule
