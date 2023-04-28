@@ -28,6 +28,189 @@ Comprobamos que funciona!
 ![image (1)](https://user-images.githubusercontent.com/73077727/235196017-f277431f-bc09-4cfb-bfcd-6c1be6675214.png)
 
 ![image](https://user-images.githubusercontent.com/73077727/235196026-11c7e100-b3fa-43d1-ac10-3f67c4873d1b.png)
+### codigo  
+
+```
+module Thunderbird(
+    input clk, reset,
+    input wire L,R,
+    output reg Ra,Rb,Rc,La,Lb,Lc );
+   
+   
+    wire clk_en;
+    clk_divider dv(.clk(clk), .reset(reset), .clk_en(clk_en));
+   
+    reg [2:0] state, nexstate;
+    parameter S0 = 3'b000;
+    parameter S1 = 3'b001;
+    parameter S2 = 3'b010;
+    parameter S3 = 3'b011;
+    parameter S4 = 3'b100;
+    parameter S5 = 3'b101;
+    parameter S6 = 3'b110;
+
+    always @(posedge clk_en, posedge reset) begin
+
+
+        if (reset)
+            state <= S0;
+        else
+            state <= nexstate;
+    end
+
+    always @(L,R, state)
+        begin
+        nexstate = state;
+        case (state )
+            S0 : begin
+                if (L == R )
+                    nexstate  = S0;
+                else
+                if (L)
+                    nexstate  = S1;
+                else
+                    nexstate = S4;
+            end
+            S1 : nexstate =S2;
+            S2 : nexstate =S3;
+            S3 : nexstate =S0;
+            S4 : nexstate =S5;
+            S5 : nexstate =S6;
+            S6 : nexstate =S0;
+        endcase
+    end
+
+    always @(L,R, state) begin
+        case (state)  
+            S0 : begin
+                Ra=0;Rb=0;Rc=0;La=0;Lb=0;Lc=0;
+            end
+            S1 : begin
+                Ra=0;Rb=0;Rc=0;La=1;Lb=0;Lc=0;
+            end
+            S2 : begin
+                Ra=0;Rb=0;Rc=0;La=1;Lb=1;Lc=0;
+            end
+            S3 : begin
+                Ra=0;Rb=0;Rc=0;La=1;Lb=1;Lc=1;
+            end
+            S4 : begin
+                Ra=1;Rb=0;Rc=0;La=0;Lb=0;Lc=0;
+            end
+            S5 : begin
+                Ra=1;Rb=1;Rc=0;La=0;Lb=0;Lc=0;
+            end
+            S6 : begin
+                Ra=1;Rb=1;Rc=1;La=0;Lb=0;Lc=0;
+            end
+        endcase
+    end
+endmodule
+```
+```
+`timescale 1ns / 1ps
+
+module Thunderbird(
+    input clk, reset,
+    input wire L,R,
+    output reg Ra,Rb,Rc,La,Lb,Lc );
+
+    reg [2:0] state, nexstate;
+    parameter S0 = 3'b000;
+    parameter S1 = 3'b001;
+    parameter S2 = 3'b010;
+    parameter S3 = 3'b011;
+    parameter S4 = 3'b100;
+    parameter S5 = 3'b101;
+    parameter S6 = 3'b110;
+
+    always @(posedge clk, posedge reset) begin
+        if (reset)
+            state <= S0;
+        else
+            state <= nexstate;
+    end
+
+    always @(L,R, state)
+        begin
+        nexstate = state;
+        case (state )
+            S0 : begin
+                if (L == R )
+                    nexstate  = S0;
+                else
+                if (L)
+                    nexstate  = S1;
+                else
+                    nexstate = S4;
+            end
+            S1 : nexstate =S2;
+            S2 : nexstate =S3;
+            S3 : nexstate =S0;
+            S4 : nexstate =S5;
+            S5 : nexstate =S6;
+            S6 : nexstate =S0;
+        endcase
+    end
+
+    always @(L,R, state) begin
+        case (state)  
+            S0 : begin
+                Ra=0;Rb=0;Rc=0;La=0;Lb=0;Lc=0;
+            end
+            S1 : begin
+                Ra=0;Rb=0;Rc=0;La=1;Lb=0;Lc=0;
+            end
+            S2 : begin
+                Ra=0;Rb=0;Rc=0;La=1;Lb=1;Lc=0;
+            end
+            S3 : begin
+                Ra=0;Rb=0;Rc=0;La=1;Lb=1;Lc=1;
+            end
+            S4 : begin
+                Ra=1;Rb=0;Rc=0;La=0;Lb=0;Lc=0;
+            end
+            S5 : begin
+                Ra=1;Rb=1;Rc=0;La=0;Lb=0;Lc=0;
+            end
+            S6 : begin
+                Ra=1;Rb=1;Rc=1;La=0;Lb=0;Lc=0;
+            end
+        endcase
+    end
+endmodule
+
+El vie, 28 abr 2023 a las 10:16, Carlos Sebastian Sobenes Obregon (<carlos.sobenes@utec.edu.pe>) escribió:
+`timescale 1ns / 1ps
+
+module Thunderbird_tb;
+    reg clk, reset;
+    reg L;
+    reg R;
+    wire Ra,Rb,Rc,La,Lb,Lc;
+   
+Thunderbird Thunderbird_tb(clk,reset,L,R,Ra,Rb,Rc,La,Lb,Lc);
+
+always begin
+clk = 1'b1;
+#10; clk = 1'b0;
+#10;
+end
+
+initial begin
+    L = "0"; R = "0";reset = "1";
+    #30; reset = "0";
+    #40; L = "1"; R = "0";
+    #40; L = "0"; R = "1";
+    #40; L = "1"; R = "1";
+   
+    #40; L = "0"; R = "1";
+    #40; L = "1"; R = "0";
+    #40; L = "1"; R = "1";
+    end
+endmodule
+```
+
 
 ### Contrastes
  
