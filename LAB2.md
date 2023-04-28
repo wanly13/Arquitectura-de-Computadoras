@@ -4,8 +4,8 @@
 
 ### Academic  
 #### Power Report 
-![](https://github.com/wanly13/Arquitectura-de-Computadoras/blob/main/ac_pr.PNG)
-![](https://github.com/wanly13/Arquitectura-de-Computadoras/blob/main/accc_pww.PNG)
+![ac_pr](https://user-images.githubusercontent.com/73077727/235194893-b30bb58e-56f5-4289-a2e3-6f4b91f37699.PNG)
+
 
 ### Industry
 #### Power Report
@@ -22,3 +22,5 @@ Comprobamos que funciona!
 ### Código Verilog  
 
 ## Simulación y Sintesis  
+![IMG_20230428_101730_edit_47008701345430](https://user-images.githubusercontent.com/73077727/235195063-952136d3-b128-489d-935b-d9688be2661a.jpg)
+![IMG_20230428_101720_edit_46989536504808](https://user-images.githubusercontent.com/73077727/235195067-1447aa46-17ce-40d7-8f0d-37ac4e04d18f.jpg)
